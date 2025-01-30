@@ -1,3 +1,5 @@
+https://chatgpt.com/share/679b46e4-1b5c-8002-94f3-9c88f0d89b64
+
 # wordCount
 Step 1: Check If Hadoop Is Installed
 Open the Terminal in Cloudera and run:
