@@ -72,3 +72,62 @@ Copy
 Edit
 hdfs dfs -cat /user/cloudera/output/part-r-00000
 Let me know if you need further clarification! 🚀
+
+
+
+
+✅ Step 1: Check If the JAR File Exists
+Run this command:
+
+sh
+Copy
+Edit
+ls -lh /home/cloudera/wc1.jar
+If the file does not exist, you need to recompile and package your JAR (see Step 2).
+If the file exists but is corrupt, recreate it.
+✅ Step 2: Recompile and Create the JAR File
+Navigate to the directory where your wc1.java file is located:
+
+sh
+Copy
+Edit
+cd /home/cloudera
+Then, recompile it with Hadoop dependencies:
+
+sh
+Copy
+Edit
+javac -classpath $(hadoop classpath) -d . wc1.java
+Now, package it into a JAR:
+
+sh
+Copy
+Edit
+jar cf wc1.jar wc1/*.class
+Check if the JAR was created:
+
+sh
+Copy
+Edit
+ls -lh wc1.jar
+✅ Step 3: Run the Hadoop Job
+Now try running your job again:
+
+sh
+Copy
+Edit
+hadoop jar wc1.jar wc1 /user/cloudera/input /user/cloudera/output
+If you get a missing dependency error (like commons-logging), try adding:
+
+sh
+Copy
+Edit
+hadoop jar wc1.jar wc1 -libjars /usr/lib/hadoop/lib/commons-logging-1.1.3.jar /user/cloudera/input /user/cloudera/output
+✅ Step 4: Verify the Output
+If the job runs successfully, check the results:
+
+sh
+Copy
+Edit
+hdfs dfs -cat /user/cloudera/output/part-r-00000
+Let me know if you still face issues! 🚀
