@@ -133,3 +133,46 @@ Copy
 Edit
 hdfs dfs -cat /user/cloudera/output/part-r-00000
 Let me know if you still face issues! 🚀
+
+
+It seems that the start-dfs.sh script is not available in your current environment. This could be because your Cloudera setup might have a different method to start Hadoop services.
+
+Try these steps instead:
+
+✅ Step 1: Start Hadoop Services Using Cloudera Manager
+If you're using Cloudera's distribution, you can use the Cloudera Manager to manage your Hadoop services. Follow these steps:
+
+Open your web browser and navigate to the Cloudera Manager UI (typically, it's http://<cloudera-manager-host>:7180).
+Log in with your username and password (default is admin/admin).
+In the Cloudera Manager UI, go to the Hadoop services section.
+Ensure that HDFS and YARN services are running. You can start them from here if they are stopped.
+✅ Step 2: Starting Hadoop Services via Command Line
+If you're not using Cloudera Manager, you might need to start the services manually using the hadoop commands.
+
+You can try the following commands to start the services:
+
+sh
+Copy
+Edit
+sudo service hadoop-hdfs-namenode start
+sudo service hadoop-hdfs-datanode start
+sudo service hadoop-yarn-resourcemanager start
+sudo service hadoop-yarn-nodemanager start
+These commands may vary depending on your Cloudera setup. You might need sudo or root privileges to execute these commands.
+
+✅ Step 3: Verify Hadoop Daemons
+After starting the services, check if the Hadoop daemons (such as NameNode, DataNode, ResourceManager, and NodeManager) are running by executing:
+
+sh
+Copy
+Edit
+jps
+You should see processes like NameNode, DataNode, ResourceManager, NodeManager, etc.
+
+After these steps, try running your job again:
+
+sh
+Copy
+Edit
+hadoop jar /home/cloudera/wc1.jar wc1.wc1 /user/cloudera/input /user/cloudera/output
+Let me know if you need further assistance!
